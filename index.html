@@ -117,7 +117,7 @@ body.theme-youth .bottom{background:#10191feF}
  <h2>🎓 大學招募</h2><div class="card"><div class="title goldText">高中生涯完成</div><p id="recruitSummary"></p><p class="muted">依照高中表現與球員能力，以下學校向你提出招募邀請。</p></div>
  <div id="offers" class="uni"></div><button class="btn secondary" onclick="show('dash')">返回查看高中紀錄</button>
 </section>
-</main><div id="matchModal" class="modalBack hidden"></div><div class="bottom">🏐 VOLLEY LIFE ｜ 排球人生 v6.2</div>
+</main><div id="matchModal" class="modalBack hidden"></div><div class="bottom">🏐 VOLLEY LIFE ｜ 排球人生 v6.2.1.1</div>
 
 <script>
 const positions={OH:'主攻手',S:'舉球員',MB:'副攻手',L:'自由球員'};
@@ -155,7 +155,20 @@ function newPreseasonDice(){
  game.dice=Array.from({length:n},()=>({value:rnd(1,7),used:false,key:null}));
  game.points=0;game.allocated={};
 }
-function createCareer(){let n=nameEl.value.trim();if(!n)return alert('請輸入姓名');let abilities={};keys.forEach(k=>abilities[k]=rnd(48,68));let body=bodyFor(selected);game={version:6,stage:'highschool',player:{name:n,pos:selected,jersey:+$('jerseySelect').value,height:body.height,weight:body.weight,talent:50+Math.floor(seedRand(seed,7)*50),abilities,ovr:0},team:schoolEl.value,age:16,year:2026,grade:1,week:1,points:0,allocated:{},results:{},history:[],events:[],pendingEvent:null,pendingMatch:null,injury:null,seasonEnded:false};newPreseasonDice();calc();saveGame(false);renderDash();show('dash')}
+function createCareer(){
+ let n=nameEl.value.trim();
+ if(!n)return alert('請輸入姓名');
+ let seed=($('seedCode')&&$('seedCode').value.trim())||makeSeed();
+ let theme=selectedTheme||'night';
+ let abilities={};keys.forEach(k=>abilities[k]=rnd(48,68));
+ let body=bodyFor(selected);
+ game={version:6.21,stage:'highschool',seed,theme,
+  player:{name:n,pos:selected,jersey:+$('jerseySelect').value,height:body.height,weight:body.weight,
+   talent:50+Math.floor(seedRand(seed,7)*50),abilities,ovr:0},
+  team:schoolEl.value,age:16,year:2026,grade:1,week:1,points:0,allocated:{},results:{},history:[],events:[],
+  pendingEvent:null,pendingMatch:null,injury:null,seasonEnded:false};
+ newPreseasonDice();calc();saveGame(false);renderDash();show('dash')
+}
 function migrate(){if(!game.seed)game.seed=makeSeed();if(!game.theme)game.theme='night';if(!game.player.talent)game.player.talent=50+Math.floor(seedRand(game.seed,7)*50);delete game.player.abilities['反應'];delete game.player.abilities['心態'];if(!game.player.jersey)game.player.jersey=10;if(!game.player.height||!game.player.weight){let b=bodyFor(game.player.pos==='OP'?'OH':game.player.pos);game.player.height=b.height;game.player.weight=b.weight}if(game.player.pos==='OP')game.player.pos='OH';game.history=game.history||[];game.events=game.events||[];game.results=game.results||{};game.pendingEvent=null;game.pendingMatch=game.pendingMatch||null;game.injury=game.injury||null;game.stage=game.stage||'highschool';game.week=Math.min(game.week||1,10);if(!game.allocMode&&game.points>0){game.allocMode='postseason'}if(!game.dice&&game.points===0&&game.week===1)newPreseasonDice()}
 function allocOpen(){return (game.allocMode==='preseason'&&game.dice&&game.dice.some(d=>!d.used))||(game.allocMode==='postseason'&&game.points>0)}
 function renderDash(){migrate();let p=game.player;$('playerName').textContent=p.name;$('jersey').textContent=p.jersey;$('position').textContent=positions[p.pos];$('team').textContent=game.team;$('grade').textContent=game.stage==='university'?'大'+['','一','二','三','四'][game.grade]:'高'+['','一','二','三'][game.grade];$('age').textContent=game.age;$('year').textContent=game.year;$('ovr').textContent=p.ovr;$('height').textContent=p.height+'cm';$('weight').textContent=p.weight+'kg';renderAlloc();renderRandomEvent();renderSeason();$('nextBtn').disabled=!!game.pendingEvent||!!game.pendingMatch||allocOpen();renderMatchModal()}
