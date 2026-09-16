@@ -2,11 +2,15 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>排球人生 v5</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>排球人生 v6</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eef6ff;background:#06101b}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(#071523,#040a11);min-height:100vh}
+*{box-sizing:border-box}html,body{touch-action:manipulation;overscroll-behavior:none}body{margin:0;background:linear-gradient(#071523,#040a11);min-height:100vh}
 .wrap{max-width:760px;margin:auto;padding:18px 14px 100px}.hero{text-align:center;padding:45px 8px}.hero h1{font-size:42px;margin:8px}
 .sub,.muted{color:#91a4b8}.card{background:linear-gradient(135deg,#0c1c2c,#091522);border:1px solid #29455c;border-radius:16px;padding:16px;margin:12px 0}
 .btn{width:100%;border:0;border-radius:12px;padding:14px;margin:5px 0;font-weight:800;font-size:16px;background:#26d890;color:#052116}
@@ -25,7 +29,7 @@
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#07131fdd;backdrop-filter:blur(10px);border-top:1px solid #29455c;padding:10px;text-align:center;font-weight:800}
 .choice{padding:13px;border:1px solid #31516b;border-radius:12px;background:#0b1c2b;margin:8px 0}.choice h3{margin:0 0 6px}.tag{float:right;padding:4px 8px;border-radius:8px;font-size:12px;font-weight:900;background:#17334a}
 .uni{display:grid;gap:8px}.uni button{text-align:left}.sectionHead{display:flex;justify-content:space-between;gap:8px;align-items:center}
-@media(max-width:480px){.metrics{grid-template-columns:repeat(2,1fr)}.metric{font-size:12px}.metric b{font-size:20px}.top{align-items:flex-start}.schoolBox{max-width:120px}.jersey{width:64px;height:64px}}
+.profileCompact{padding:12px}.profileLine{display:flex;align-items:center;gap:10px;overflow-x:auto;scrollbar-width:none}.profileLine::-webkit-scrollbar{display:none}.profileCompact .jersey{width:52px;height:52px;font-size:24px}.profileCompact .identity{gap:8px}.profileName{font-size:22px;white-space:nowrap}.profileCompact .pill{padding:5px 8px;white-space:nowrap}.profileSchool{min-width:92px;text-align:center}.profileSchool .school{font-size:14px;white-space:nowrap}.miniMetric{min-width:68px;text-align:center;padding-left:10px;border-left:1px solid #29455c;white-space:nowrap}.miniMetric b{display:block;font-size:17px}.miniMetric small{font-size:10px;color:#91a4b8}.modalBack{position:fixed;inset:0;background:#02070dcc;display:grid;place-items:center;padding:18px;z-index:50}.modalBack.hidden{display:none}.modal{width:min(520px,100%);background:#0b1c2b;border:1px solid #ffbd38;border-radius:18px;padding:20px;box-shadow:0 20px 60px #000}.diceRow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.die{width:48px;height:48px;border:1px solid #ffbd38;border-radius:10px;background:#151f2b;color:#ffc044;font-size:22px;font-weight:900}.die.used{opacity:.35;border-color:#52606e}.injury{border-color:#ff6868!important}.rewardBadge{display:inline-block;background:#17334a;border:1px solid #31516b;border-radius:9px;padding:7px 10px;margin:4px}.seasonRecord{font-size:13px;color:#91a4b8;margin-top:10px}@media(max-width:480px){.metrics{grid-template-columns:repeat(2,1fr)}.metric{font-size:12px}.metric b{font-size:20px}.top{align-items:flex-start}.schoolBox{max-width:120px}.jersey{width:64px;height:64px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -46,17 +50,12 @@
 </section>
 
 <section id="dash" class="hidden">
- <div class="card">
-  <div class="top">
-   <div class="identity"><div id="jersey" class="jersey"></div><div><h2 id="playerName" style="margin:0 0 8px"></h2><span id="position" class="pill"></span></div></div>
-   <div class="schoolBox"><small class="muted">所屬學校</small><div id="team" class="school"></div><span id="grade" class="pill grade"></span></div>
-  </div>
-  <div class="metrics">
-   <div class="metric"><b id="age"></b>年齡</div><div class="metric"><b id="year"></b>年份</div><div class="metric"><b id="ovr"></b>綜合</div>
-   <div class="metric"><b id="height"></b>身高</div><div class="metric"><b id="weight"></b>體重</div><div class="metric"><b id="salary">0</b>生涯薪(萬)</div>
-  </div>
- </div>
- <div id="allocCard" class="card timeline green event"><div class="top"><span class="title greenText">新學年｜能力分配</span><span class="muted">成長階段</span></div><p>本學年獲得 <b id="points"></b> 點成長點數，可自由分配。</p><div id="allocList"></div><button class="btn" onclick="confirmAlloc()">完成能力分配</button></div>
+ <div class="card profileCompact"><div class="profileLine">
+  <div class="identity"><div id="jersey" class="jersey"></div><div><h2 id="playerName" class="profileName" style="margin:0 0 4px"></h2><span id="position" class="pill"></span></div></div>
+  <div class="profileSchool"><small class="muted">所屬學校</small><div id="team" class="school"></div><span id="grade" class="pill grade"></span></div>
+  <div class="miniMetric"><b id="age"></b><small>年齡</small></div><div class="miniMetric"><b id="year"></b><small>年份</small></div><div class="miniMetric"><b id="ovr"></b><small>綜合</small></div><div class="miniMetric"><b id="height"></b><small>身高</small></div><div class="miniMetric"><b id="weight"></b><small>體重</small></div><div class="miniMetric"><b id="salary">0</b><small>生涯薪(萬)</small></div>
+ </div></div>
+ <div id="allocCard" class="card timeline green event"><div class="top"><span class="title greenText" id="allocTitle">球季前｜訓練成果</span><span class="muted" id="allocModeLabel">骰子分配</span></div><p id="allocHelp"></p><div id="diceBox" class="diceRow"></div><div id="allocList"></div><button class="btn" onclick="confirmAlloc()">完成能力分配</button></div>
  <div id="randomEvent"></div><div id="season"></div>
  <div class="card"><button id="nextBtn" class="btn gold" onclick="nextStep()">繼續下一週</button><button class="btn secondary" onclick="saveGame(true)">儲存生涯</button><button class="btn secondary" onclick="show('home')">回首頁</button></div>
 </section>
@@ -65,126 +64,54 @@
  <h2>🎓 大學招募</h2><div class="card"><div class="title goldText">高中生涯完成</div><p id="recruitSummary"></p><p class="muted">依照高中表現與球員能力，以下學校向你提出招募邀請。</p></div>
  <div id="offers" class="uni"></div><button class="btn secondary" onclick="show('dash')">返回查看高中紀錄</button>
 </section>
-</main><div class="bottom">🏐 VOLLEY LIFE ｜ 排球人生 v5</div>
+</main><div id="matchModal" class="modalBack hidden"></div><div class="bottom">🏐 VOLLEY LIFE ｜ 排球人生 v6</div>
 
 <script>
 const positions={OH:'主攻手',S:'舉球員',MB:'副攻手',L:'自由球員'};
 const schools=['豐原高商','內湖高工','華僑高中','麥寮高中','屏榮高中','大成商工','內湖高中','頭城家商','福成高中','建國中學','龍津高中','苑裡高中','東方工商','大溪高中','明德高中','曾文農工','瑞芳高工'];
 const universities=['台灣體大','台北市大','臺灣師大','中原大學','國北教大','彰化師大','大仁科大','台北大學','嘉義大學','臺灣大學','陽明交大','清華大學'];
 const keys=['扣球','發球','接發','防守','攔網','舉球','彈跳','速度','力量','體能','反應','球商','心態'];
-let selected='OH',game=null;
+const matchSchedule={3:{key:'yongxin',name:'永信杯',type:'cup'},6:{key:'huazong',name:'華宗杯',type:'cup'},10:{key:'league',name:'高中聯賽',type:'league'}};
+let selected='OH',game=null,selectedDie=null;
 const $=id=>document.getElementById(id),nameEl=$('name'),schoolEl=$('school'),continueBtnEl=$('continueBtn'),positionsEl=$('positions');
-
-function show(id){['home','create','dash','recruit'].forEach(x=>$(x).classList.toggle('hidden',x!==id));refreshContinue()}
-function showCreate(){show('create')}
+function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a} function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function show(id){['home','create','dash','recruit'].forEach(x=>$(x).classList.toggle('hidden',x!==id));refreshContinue()} function showCreate(){show('create')}
 function renderPositions(){positionsEl.innerHTML='';Object.entries(positions).forEach(([k,v])=>{let b=document.createElement('button');b.className='pos '+(k===selected?'on':'');b.textContent=v;b.onclick=()=>{selected=k;renderPositions()};positionsEl.appendChild(b)})}
-schools.forEach(x=>schoolEl.innerHTML+=`<option>${x}</option>`);
-for(let i=1;i<=20;i++)$('jerseySelect').innerHTML+=`<option value="${i}" ${i===10?'selected':''}>${i} 號</option>`;
-renderPositions();
-
-function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a}
-function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-function bodyFor(pos){
- const ranges={OH:[176,190,65,82],MB:[184,200,70,90],S:[172,185,62,78],L:[165,180,57,72]};
- let r=ranges[pos]; return {height:rnd(r[0],r[1]),weight:rnd(r[2],r[3])};
-}
+schools.forEach(x=>schoolEl.innerHTML+=`<option>${x}</option>`);for(let i=1;i<=20;i++)$('jerseySelect').innerHTML+=`<option value="${i}" ${i===10?'selected':''}>${i} 號</option>`;renderPositions();
+function bodyFor(pos){const r={OH:[176,190,65,82],MB:[184,200,70,90],S:[172,185,62,78],L:[165,180,57,72]}[pos];return{height:rnd(r[0],r[1]),weight:rnd(r[2],r[3])}}
 function calc(){game.player.ovr=Math.round(keys.reduce((s,k)=>s+game.player.abilities[k],0)/keys.length)}
-function createCareer(){
- let n=nameEl.value.trim();if(!n)return alert('請輸入姓名');
- let abilities={};keys.forEach(k=>abilities[k]=rnd(48,68));let body=bodyFor(selected);
- game={version:5,stage:'highschool',player:{name:n,pos:selected,jersey:+$('jerseySelect').value,height:body.height,weight:body.weight,abilities,ovr:0},team:schoolEl.value,age:16,year:2026,grade:1,week:1,points:12,allocated:{},results:{},history:[],events:[],yearEventCount:0,pendingEvent:null};
- calc();saveGame(false);renderDash();show('dash')
-}
-function migrate(){
- if(!game.player.jersey)game.player.jersey=10;
- if(!game.player.height||!game.player.weight){let b=bodyFor(game.player.pos==='OP'?'OH':game.player.pos);game.player.height=b.height;game.player.weight=b.weight}
- if(game.player.pos==='OP')game.player.pos='OH';
- game.history=game.history||[];game.yearEventCount=game.yearEventCount||0;game.pendingEvent=game.pendingEvent||null;game.stage=game.stage||'highschool';
-}
-function renderDash(){
- migrate();let p=game.player;$('playerName').textContent=p.name;$('jersey').textContent=p.jersey;$('position').textContent=positions[p.pos];$('team').textContent=game.team;
- $('grade').textContent=game.stage==='university'?'大'+['','一','二','三','四'][game.grade]:'高'+['','一','二','三'][game.grade];
- $('age').textContent=game.age;$('year').textContent=game.year;$('ovr').textContent=p.ovr;$('height').textContent=p.height+' cm';$('weight').textContent=p.weight+' kg';$('points').textContent=game.points;
- $('allocCard').classList.toggle('hidden',game.points===0);$('allocList').innerHTML='';
- keys.forEach(k=>{let used=game.allocated[k]||0;$('allocList').innerHTML+=`<div class="alloc"><span>${k} <b>${p.abilities[k]}</b> <small class="greenText">+${used}</small></span><button class="mini" onclick="adj('${k}',-1)">−</button><button class="mini" onclick="adj('${k}',1)">＋</button></div>`});
- renderRandomEvent();renderSeason();$('nextBtn').disabled=!!game.pendingEvent;
-}
-function adj(k,d){if(d>0&&game.points<=0)return;if(d<0&&!(game.allocated[k]>0))return;game.player.abilities[k]=clamp(game.player.abilities[k]+d,1,99);game.allocated[k]=(game.allocated[k]||0)+d;game.points-=d;calc();renderDash()}
-function confirmAlloc(){if(game.points>0)return alert('還有 '+game.points+' 點尚未分配');game.allocated={};saveGame(false);renderDash()}
-
-const randomEvents=[
- {name:'增加食量',desc:'近期訓練量提高，你決定增加每天的食量。',choices:[
-  {text:'增加食量',chance:60,success:'力量 +5',fail:'體重 +5 kg',run(ok){if(ok)game.player.abilities['力量']=clamp(game.player.abilities['力量']+5,1,99);else game.player.weight+=5}},
-  {text:'維持正常飲食',chance:100,success:'沒有額外變化',fail:'',run(ok){}}
- ]},
- {name:'自主重量訓練',desc:'你想利用休息時間加強重量訓練。',choices:[
-  {text:'挑戰高強度',chance:55,success:'力量 +4、彈跳 +1',fail:'體能 -2',run(ok){if(ok){game.player.abilities['力量']+=4;game.player.abilities['彈跳']+=1}else game.player.abilities['體能']-=2}},
-  {text:'穩定訓練',chance:85,success:'力量 +2',fail:'沒有變化',run(ok){if(ok)game.player.abilities['力量']+=2}}
- ]},
- {name:'加強跳躍訓練',desc:'教練安排額外的爆發力與起跳課表。',choices:[
-  {text:'全力投入',chance:60,success:'彈跳 +4',fail:'體能 -2',run(ok){game.player.abilities[ok?'彈跳':'體能']+=ok?4:-2}},
-  {text:'保守完成',chance:85,success:'彈跳 +2',fail:'沒有變化',run(ok){if(ok)game.player.abilities['彈跳']+=2}}
- ]},
- {name:'校內對抗賽',desc:'你在校內對抗賽得到證明自己的機會。',choices:[
-  {text:'積極搶攻',chance:55,success:'扣球 +3、心態 +2',fail:'心態 -1',run(ok){if(ok){game.player.abilities['扣球']+=3;game.player.abilities['心態']+=2}else game.player.abilities['心態']-=1}},
-  {text:'穩定發揮',chance:80,success:'球商 +2',fail:'沒有變化',run(ok){if(ok)game.player.abilities['球商']+=2}}
- ]}
-];
-function maybeEvent(){
- if(game.pendingEvent||game.yearEventCount>=3)return;
- if([3,7,13].includes(game.week)&&Math.random()<0.8){let ev=randomEvents[rnd(0,randomEvents.length-1)];game.pendingEvent={idx:randomEvents.indexOf(ev)};game.yearEventCount++}
-}
-function chooseEvent(i){
- let ev=randomEvents[game.pendingEvent.idx],c=ev.choices[i],ok=Math.random()*100<c.chance;c.run(ok);
- keys.forEach(k=>game.player.abilities[k]=clamp(game.player.abilities[k],1,99));calc();
- let result=ok?c.success:(c.fail||'沒有變化');game.events.unshift(`第 ${game.week} 週｜${ev.name}：${ok?'成功':'結果'}｜${result}`);
- game.pendingEvent=null;saveGame(false);renderDash()
-}
-function renderRandomEvent(){
- let box=$('randomEvent');if(!game.pendingEvent){box.innerHTML='';return}
- let ev=randomEvents[game.pendingEvent.idx];
- box.innerHTML=`<div class="card timeline green event"><div class="sectionHead"><span class="title goldText">🎲 隨機事件｜${ev.name}</span><span class="muted">年度事件 ${game.yearEventCount}/3</span></div><p>${ev.desc}</p>${ev.choices.map((c,i)=>`<div class="choice"><h3>${c.text}</h3><div class="muted">成功率 ${c.chance}%｜成功：${c.success}${c.fail?'｜失敗：'+c.fail:''}</div><button class="btn secondary" onclick="chooseEvent(${i})">選擇</button></div>`).join('')}</div>`
-}
-function cupRank(){let strength=game.team==='大成商工'?88:rnd(55,82);let score=strength+game.player.ovr*.25+rnd(-18,18);return score>94?'冠軍':score>88?'亞軍':score>82?'季軍':score>76?'殿軍':'未進四強'}
-function leagueRank(){let strength=game.team==='大成商工'?88:rnd(55,82);let score=strength+game.player.ovr*.25+rnd(-20,20);return Math.max(1,Math.min(17,18-Math.round(score/7)))}
-function finishYear(){
- game.history.push({stage:game.stage,year:game.year,grade:game.grade,team:game.team,results:{...game.results},ovr:game.player.ovr});
- if(game.stage==='highschool'&&game.grade===3){game.stage='recruit';saveGame(false);makeOffers();return}
- game.grade++;game.age++;game.year++;game.week=1;game.points=12;game.allocated={};game.results={};game.events=[];game.yearEventCount=0;
- if(game.age<=19&&Math.random()<0.75)game.player.height+=rnd(0,2);
- game.player.weight=clamp(game.player.weight+rnd(-1,2),45,120)
-}
-function nextStep(){
- if(game.points>0)return alert('請先完成本學年的能力分配');if(game.pendingEvent)return alert('請先處理目前的隨機事件');
- game.week++;let e='日常訓練';
- if(game.week===5){game.results.yongxin=cupRank();e='永信杯完成'}else if(game.week===10){game.results.huazong=cupRank();e='華宗杯完成'}else if(game.week===16){game.results.league=leagueRank();e='高中聯賽完成'}else{let k=keys[rnd(0,keys.length-1)];game.player.abilities[k]=clamp(game.player.abilities[k]+1,1,99);e='訓練：'+k+' +1'}
- game.events.unshift('第 '+game.week+' 週｜'+e);calc();maybeEvent();
- if(game.week>=18&&!game.pendingEvent){finishYear();if(game.stage==='recruit')return}
- saveGame(false);renderDash()
-}
-function scoreCareer(){
- let s=game.player.ovr;game.history.forEach(h=>{if(['冠軍','亞軍','季軍','殿軍'].includes(h.results.yongxin))s+=4;if(['冠軍','亞軍','季軍','殿軍'].includes(h.results.huazong))s+=4;if(h.results.league&&h.results.league<=8)s+=9-h.results.league});return s
-}
-function makeOffers(){
- let score=scoreCareer(),count=score>=95?8:score>=85?6:score>=75?5:4;
- let shuffled=[...universities].sort(()=>Math.random()-.5);game.offers=shuffled.slice(0,count);saveGame(false);renderRecruit();show('recruit')
-}
-function renderRecruit(){
- if(!game.offers||!game.offers.length){game.stage='recruit';makeOffers();return}
- $('recruitSummary').textContent=`${game.player.name}｜${game.team}｜高中畢業 OVR ${game.player.ovr}`;
- $('offers').innerHTML=game.offers.map(u=>`<div class="card"><div class="title">${u}</div><p class="muted">排球隊向你提出入學招募邀請。</p><button class="btn gold" onclick="joinUniversity('${u}')">選擇 ${u}</button></div>`).join('')
-}
-function joinUniversity(u){
- if(!confirm(`確定接受 ${u} 的招募邀請嗎？`))return;
- game.team=u;game.stage='university';game.grade=1;game.age=19;game.year++;game.week=1;game.points=14;game.allocated={};game.results={};game.events=[`正式加入 ${u} 排球隊`];game.yearEventCount=0;game.pendingEvent=null;saveGame(false);renderDash();show('dash')
-}
-function renderSeason(){
- let r=game.results,league=r.league;
- if(game.stage==='university'){$('season').innerHTML=`<div class="card timeline purple event"><div class="title purpleText">🎓 大學生涯</div><p>你已加入 <b>${game.team}</b>。大學完整賽事系統將在下一階段擴充。</p></div>`;return}
- $('season').innerHTML=`<div class="card timeline event"><div class="top"><span class="title blueText">本學年進程</span><span class="muted">第 ${game.week} 週</span></div><p>系統會自動安排訓練與正式賽事。</p></div><div class="card timeline goldline event"><div class="title goldText">🏆 永信杯</div><p>${r.yongxin||'尚未進行'}（冠亞季殿）</p></div><div class="card timeline goldline event"><div class="title goldText">🏆 華宗杯</div><p>${r.huazong||'尚未進行'}（冠亞季殿）</p></div><div class="card timeline goldline event"><div class="title goldText">🏆 高中聯賽</div><p>${league?(league<=8?'第 '+league+' 名':'未進前八'):'尚未進行'}（顯示前八名）</p></div><div class="card timeline purple event"><div class="title purpleText">狀態｜年度紀錄</div>${game.events.slice(0,6).map(x=>'<p>'+x+'</p>').join('')||'<p class="muted">新學年剛開始。</p>'}</div>`
-}
-function saveGame(msg){localStorage.setItem('volleyball-life-save-v5',JSON.stringify(game));if(msg)alert('生涯已儲存')}
-function loadGame(){try{game=JSON.parse(localStorage.getItem('volleyball-life-save-v5'))||JSON.parse(localStorage.getItem('volleyball-life-save-v4'));if(!game)throw 0;migrate();calc();if(game.stage==='recruit'){if(!game.offers)makeOffers();else{renderRecruit();show('recruit')}}else{renderDash();show('dash')}}catch(e){alert('目前沒有可讀取的存檔')}}
-function refreshContinue(){continueBtnEl.disabled=!(localStorage.getItem('volleyball-life-save-v5')||localStorage.getItem('volleyball-life-save-v4'))}
-refreshContinue();
+function newPreseasonDice(){let n=rnd(1,7);game.allocMode='preseason';game.dice=Array.from({length:n},()=>({value:rnd(1,7),used:false,key:null}));game.points=0;game.allocated={}}
+function createCareer(){let n=nameEl.value.trim();if(!n)return alert('請輸入姓名');let abilities={};keys.forEach(k=>abilities[k]=rnd(48,68));let body=bodyFor(selected);game={version:6,stage:'highschool',player:{name:n,pos:selected,jersey:+$('jerseySelect').value,height:body.height,weight:body.weight,abilities,ovr:0},team:schoolEl.value,age:16,year:2026,grade:1,week:1,points:0,allocated:{},results:{},history:[],events:[],pendingEvent:null,pendingMatch:null,injury:null,seasonEnded:false};newPreseasonDice();calc();saveGame(false);renderDash();show('dash')}
+function migrate(){if(!game.player.jersey)game.player.jersey=10;if(!game.player.height||!game.player.weight){let b=bodyFor(game.player.pos==='OP'?'OH':game.player.pos);game.player.height=b.height;game.player.weight=b.weight}if(game.player.pos==='OP')game.player.pos='OH';game.history=game.history||[];game.events=game.events||[];game.results=game.results||{};game.pendingEvent=null;game.pendingMatch=game.pendingMatch||null;game.injury=game.injury||null;game.stage=game.stage||'highschool';game.week=Math.min(game.week||1,10);if(!game.allocMode&&game.points>0){game.allocMode='postseason'}if(!game.dice&&game.points===0&&game.week===1)newPreseasonDice()}
+function allocOpen(){return (game.allocMode==='preseason'&&game.dice&&game.dice.some(d=>!d.used))||(game.allocMode==='postseason'&&game.points>0)}
+function renderDash(){migrate();let p=game.player;$('playerName').textContent=p.name;$('jersey').textContent=p.jersey;$('position').textContent=positions[p.pos];$('team').textContent=game.team;$('grade').textContent=game.stage==='university'?'大'+['','一','二','三','四'][game.grade]:'高'+['','一','二','三'][game.grade];$('age').textContent=game.age;$('year').textContent=game.year;$('ovr').textContent=p.ovr;$('height').textContent=p.height+'cm';$('weight').textContent=p.weight+'kg';renderAlloc();renderRandomEvent();renderSeason();$('nextBtn').disabled=!!game.pendingEvent||!!game.pendingMatch||allocOpen();renderMatchModal()}
+function renderAlloc(){let card=$('allocCard');card.classList.toggle('hidden',!allocOpen());$('allocList').innerHTML='';$('diceBox').innerHTML='';if(!allocOpen())return;if(game.allocMode==='preseason'){$('allocTitle').textContent='球季前｜分配訓練成果';$('allocModeLabel').textContent=`${game.dice.length} 顆骰子`;$('allocHelp').textContent='點選一顆骰子，再點能力旁的「套用」。每顆骰子最高 7 點。';game.dice.forEach((d,i)=>{$('diceBox').innerHTML+=`<button class="die ${d.used?'used':''}" ${d.used?'disabled':''} onclick="selectDie(${i})">${d.value}</button>`});keys.forEach(k=>{$('allocList').innerHTML+=`<div class="alloc"><span>${k} <b>${game.player.abilities[k]}</b></span><span></span><button class="mini" onclick="applyDie('${k}')">＋</button></div>`})}else{$('allocTitle').textContent='季末｜分配比賽成果';$('allocModeLabel').textContent=`剩餘 ${game.points} 點`;$('allocHelp').textContent='比賽成績轉成能力點，季末可以 1 點 1 點自由分配。';keys.forEach(k=>{let used=game.allocated[k]||0;$('allocList').innerHTML+=`<div class="alloc"><span>${k} <b>${game.player.abilities[k]}</b> <small class="greenText">+${used}</small></span><button class="mini" onclick="adjPoint('${k}',-1)">−</button><button class="mini" onclick="adjPoint('${k}',1)">＋</button></div>`})}}
+function selectDie(i){if(game.dice[i].used)return;selectedDie=i;renderAlloc();document.querySelectorAll('.die')[i]?.focus()}
+function applyDie(k){if(selectedDie===null||!game.dice[selectedDie]||game.dice[selectedDie].used)return alert('請先點選一顆骰子');let d=game.dice[selectedDie];game.player.abilities[k]=clamp(game.player.abilities[k]+d.value,1,99);d.used=true;d.key=k;game.events.unshift(`球季前訓練｜${k} +${d.value}`);selectedDie=null;calc();saveGame(false);renderDash()}
+function adjPoint(k,d){if(d>0&&game.points<=0)return;if(d<0&&!(game.allocated[k]>0))return;game.player.abilities[k]=clamp(game.player.abilities[k]+d,1,99);game.allocated[k]=(game.allocated[k]||0)+d;game.points-=d;calc();renderDash()}
+function confirmAlloc(){if(game.allocMode==='preseason'&&game.dice.some(d=>!d.used))return alert('還有骰子尚未分配');if(game.allocMode==='postseason'&&game.points>0)return alert('還有 '+game.points+' 點尚未分配');game.allocMode=null;game.dice=[];game.allocated={};if(game.seasonEnded){game.seasonEnded=false;advanceYear()}saveGame(false);renderDash()}
+const randomEvents=[{name:'增加食量',desc:'近期訓練量提高，你決定增加每天的食量。',choices:[{text:'增加食量',chance:60,success:'力量 +5',fail:'體重 +5 kg',run(ok){if(ok)game.player.abilities['力量']+=5;else game.player.weight+=5}},{text:'維持正常飲食',chance:100,success:'沒有額外變化',fail:'',run(){}}]},{name:'自主重量訓練',desc:'利用休息時間加強重量訓練。',choices:[{text:'挑戰高強度',chance:55,success:'力量 +4、彈跳 +1',fail:'體能 -2',run(ok){if(ok){game.player.abilities['力量']+=4;game.player.abilities['彈跳']+=1}else game.player.abilities['體能']-=2}},{text:'穩定訓練',chance:85,success:'力量 +2',fail:'沒有變化',run(ok){if(ok)game.player.abilities['力量']+=2}}]}];
+function maybeEvent(){if(game.pendingEvent||game.pendingMatch||game.injury?.weeks>0)return;if([2,5,8].includes(game.week)&&Math.random()<0.45){let ev=randomEvents[rnd(0,randomEvents.length-1)];game.pendingEvent={idx:randomEvents.indexOf(ev)}}}
+function maybeInjury(){if(game.pendingEvent||game.pendingMatch||game.injury?.weeks>0||Math.random()>=0.12)return false;let injuries=[{name:'手指扭傷',weeks:1,loss:{'接發':1,'舉球':1}},{name:'腳踝扭傷',weeks:2,loss:{'速度':2,'彈跳':2}},{name:'肩膀拉傷',weeks:3,loss:{'扣球':3,'發球':2}},{name:'膝蓋重傷',weeks:99,loss:{'彈跳':6,'速度':5,'力量':3},season:true}];let x=injuries[rnd(0,injuries.length-1)];Object.entries(x.loss).forEach(([k,v])=>game.player.abilities[k]=clamp(game.player.abilities[k]-v,1,99));game.injury={name:x.name,weeks:x.weeks,season:!!x.season};game.events.unshift(`第 ${game.week} 週｜受傷：${x.name}${x.season?'（整季報銷）':'，休養 '+x.weeks+' 週'}`);calc();return true}
+function chooseEvent(i){let ev=randomEvents[game.pendingEvent.idx],c=ev.choices[i],ok=Math.random()*100<c.chance;c.run(ok);keys.forEach(k=>game.player.abilities[k]=clamp(game.player.abilities[k],1,99));calc();game.events.unshift(`第 ${game.week} 週｜${ev.name}｜${ok?c.success:(c.fail||'沒有變化')}`);game.pendingEvent=null;saveGame(false);renderDash()}
+function renderRandomEvent(){let box=$('randomEvent');if(!game.pendingEvent){box.innerHTML='';return}let ev=randomEvents[game.pendingEvent.idx];box.innerHTML=`<div class="card timeline green event"><div class="title goldText">🎲 隨機事件｜${ev.name}</div><p>${ev.desc}</p>${ev.choices.map((c,i)=>`<div class="choice"><h3>${c.text}</h3><div class="muted">成功率 ${c.chance}%｜成功：${c.success}${c.fail?'｜失敗：'+c.fail:''}</div><button class="btn secondary" onclick="chooseEvent(${i})">選擇</button></div>`).join('')}</div>`}
+function cupRank(){let strength=game.team==='大成商工'?88:rnd(55,82),score=strength+game.player.ovr*.25+rnd(-18,18);return score>94?'冠軍':score>88?'亞軍':score>82?'季軍':score>76?'殿軍':'未進四強'}
+function leagueRank(){let strength=game.team==='大成商工'?88:rnd(55,82),score=strength+game.player.ovr*.25+rnd(-20,20);return Math.max(1,Math.min(17,18-Math.round(score/7)))}
+function scheduleMatch(){let m=matchSchedule[game.week];if(!m||game.results[m.key])return;if(game.injury?.season||game.injury?.weeks>0){let result=m.type==='league'?rnd(5,17):['未進四強','殿軍','季軍'][rnd(0,2)];game.results[m.key]=result;game.events.unshift(`第 ${game.week} 週｜${m.name}：因傷缺席｜球隊成績 ${formatResult(m,result)}`);if(game.week===10)endSeason();return}game.pendingMatch=m}
+function formatResult(m,r){return m.type==='league'?(r<=8?'第 '+r+' 名':'未進前八'):r}
+function playMatch(){let m=game.pendingMatch;if(!m)return;let result=m.type==='league'?leagueRank():cupRank();game.results[m.key]=result;game.events.unshift(`第 ${game.week} 週｜${m.name}｜${formatResult(m,result)}`);game.pendingMatch=null;saveGame(false);if(game.week===10)endSeason();renderDash()}
+function renderMatchModal(){let box=$('matchModal');if(!game.pendingMatch){box.classList.add('hidden');box.innerHTML='';return}let m=game.pendingMatch;box.classList.remove('hidden');box.innerHTML=`<div class="modal"><div class="title goldText">🏆 ${m.name}</div><h2>比賽時間到了！</h2><p>${game.team} 即將參加 ${m.name}。</p><button class="btn gold" onclick="playMatch()">進入比賽</button></div>`}
+function rewardForResult(key,r){if(key==='league'){if(r===1)return 10;if(r===2)return 7;if(r<=4)return 5;if(r<=8)return 3;return 1}return {'冠軍':10,'亞軍':7,'季軍':5,'殿軍':3,'未進四強':1}[r]||0}
+function endSeason(){let total=Object.entries(game.results).reduce((s,[k,r])=>s+rewardForResult(k,r),0);game.points=total;game.allocMode='postseason';game.allocated={};game.seasonEnded=true;game.events.unshift(`季末結算｜獲得 ${total} 點比賽成果能力點`);saveGame(false)}
+function advanceYear(){game.history.push({stage:game.stage,year:game.year,grade:game.grade,team:game.team,results:{...game.results},ovr:game.player.ovr});if(game.stage==='highschool'&&game.grade===3){game.stage='recruit';saveGame(false);makeOffers();return}game.grade++;game.age++;game.year++;game.week=1;game.results={};game.events=[];game.injury=null;if(game.age<=19&&Math.random()<.75)game.player.height+=rnd(0,2);game.player.weight=clamp(game.player.weight+rnd(-1,2),45,120);newPreseasonDice()}
+function nextStep(){if(allocOpen())return alert('請先完成能力分配');if(game.pendingEvent||game.pendingMatch)return alert('請先處理目前事件');if(game.week>=10)return;game.week++;if(game.injury?.weeks>0&&!game.injury.season){game.injury.weeks--;if(game.injury.weeks===0){game.events.unshift(`第 ${game.week} 週｜傷勢恢復，可以重新出賽`);game.injury=null}}let m=matchSchedule[game.week];if(m){scheduleMatch()}else{if(!maybeInjury()){let k=keys[rnd(0,keys.length-1)];if(!game.injury?.season){game.player.abilities[k]=clamp(game.player.abilities[k]+1,1,99);game.events.unshift(`第 ${game.week} 週｜訓練：${k} +1`)}}maybeEvent()}calc();saveGame(false);renderDash()}
+function scoreCareer(){let s=game.player.ovr;game.history.forEach(h=>Object.entries(h.results||{}).forEach(([k,r])=>s+=rewardForResult(k,r)));return s}
+function makeOffers(){let score=scoreCareer(),count=score>=95?8:score>=85?6:score>=75?5:4;game.offers=[...universities].sort(()=>Math.random()-.5).slice(0,count);saveGame(false);renderRecruit();show('recruit')}
+function renderRecruit(){if(!game.offers||!game.offers.length){makeOffers();return}$('recruitSummary').textContent=`${game.player.name}｜${game.team}｜高中畢業 OVR ${game.player.ovr}`;$('offers').innerHTML=game.offers.map(u=>`<div class="card"><div class="title">${u}</div><p class="muted">排球隊向你提出入學招募邀請。</p><button class="btn gold" onclick="joinUniversity('${u}')">選擇 ${u}</button></div>`).join('')}
+function joinUniversity(u){if(!confirm(`確定接受 ${u} 的招募邀請嗎？`))return;game.team=u;game.stage='university';game.grade=1;game.age=19;game.year++;game.week=1;game.results={};game.events=[`正式加入 ${u} 排球隊`];game.injury=null;newPreseasonDice();saveGame(false);renderDash();show('dash')}
+function renderSeason(){if(game.stage==='university'){$('season').innerHTML=`<div class="card timeline purple event"><div class="title purpleText">🎓 大學生涯</div><p>你已加入 <b>${game.team}</b>。大學賽事系統下一階段擴充。</p></div>`;return}let records=Object.entries(game.results).map(([k,r])=>{let m=Object.values(matchSchedule).find(x=>x.key===k);return m?`${m.name}：${formatResult(m,r)}`:''}).filter(Boolean);$('season').innerHTML=`<div class="card timeline event"><div class="top"><span class="title blueText">本學年進程</span><span class="muted">第 ${game.week} / 10 週</span></div><p>比賽會在第 3、6、10 週自動跳出。</p>${game.injury?`<p class="redText">🚑 ${game.injury.name}${game.injury.season?'｜整季報銷':'｜剩餘 '+game.injury.weeks+' 週'}</p>`:''}<div class="seasonRecord">${records.length?records.join('　｜　'):'目前尚無比賽紀錄'}</div></div><div class="card timeline purple event"><div class="title purpleText">狀態｜年度紀錄</div>${game.events.slice(0,6).map(x=>'<p>'+x+'</p>').join('')||'<p class="muted">新學年剛開始。</p>'}</div>`}
+function saveGame(msg){localStorage.setItem('volleyball-life-save-v6',JSON.stringify(game));if(msg)alert('生涯已儲存')}
+function loadGame(){try{game=JSON.parse(localStorage.getItem('volleyball-life-save-v6'))||JSON.parse(localStorage.getItem('volleyball-life-save-v5'))||JSON.parse(localStorage.getItem('volleyball-life-save-v4'));if(!game)throw 0;migrate();calc();if(game.stage==='recruit'){if(!game.offers)makeOffers();else{renderRecruit();show('recruit')}}else{renderDash();show('dash')}}catch(e){console.error(e);alert('目前沒有可讀取的存檔')}}
+function refreshContinue(){continueBtnEl.disabled=!(localStorage.getItem('volleyball-life-save-v6')||localStorage.getItem('volleyball-life-save-v5')||localStorage.getItem('volleyball-life-save-v4'))}
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});document.addEventListener('gesturestart',e=>e.preventDefault(),{passive:false});refreshContinue();
 </script></body></html>
