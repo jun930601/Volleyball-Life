@@ -29,12 +29,58 @@
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#07131fdd;backdrop-filter:blur(10px);border-top:1px solid #29455c;padding:10px;text-align:center;font-weight:800}
 .choice{padding:13px;border:1px solid #31516b;border-radius:12px;background:#0b1c2b;margin:8px 0}.choice h3{margin:0 0 6px}.tag{float:right;padding:4px 8px;border-radius:8px;font-size:12px;font-weight:900;background:#17334a}
 .uni{display:grid;gap:8px}.uni button{text-align:left}.sectionHead{display:flex;justify-content:space-between;gap:8px;align-items:center}
-.profileCompact{padding:12px}.profileLine{display:flex;align-items:center;gap:10px;overflow-x:auto;scrollbar-width:none}.profileLine::-webkit-scrollbar{display:none}.profileCompact .jersey{width:52px;height:52px;font-size:24px}.profileCompact .identity{gap:8px}.profileName{font-size:22px;white-space:nowrap}.profileCompact .pill{padding:5px 8px;white-space:nowrap}.profileSchool{min-width:92px;text-align:center}.profileSchool .school{font-size:14px;white-space:nowrap}.miniMetric{min-width:68px;text-align:center;padding-left:10px;border-left:1px solid #29455c;white-space:nowrap}.miniMetric b{display:block;font-size:17px}.miniMetric small{font-size:10px;color:#91a4b8}.modalBack{position:fixed;inset:0;background:#02070dcc;display:grid;place-items:center;padding:18px;z-index:50}.modalBack.hidden{display:none}.modal{width:min(520px,100%);background:#0b1c2b;border:1px solid #ffbd38;border-radius:18px;padding:20px;box-shadow:0 20px 60px #000}.diceRow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.die{width:48px;height:48px;border:1px solid #ffbd38;border-radius:10px;background:#151f2b;color:#ffc044;font-size:22px;font-weight:900}.die.used{opacity:.35;border-color:#52606e}.injury{border-color:#ff6868!important}.rewardBadge{display:inline-block;background:#17334a;border:1px solid #31516b;border-radius:9px;padding:7px 10px;margin:4px}.seasonRecord{font-size:13px;color:#91a4b8;margin-top:10px}@media(max-width:480px){.metrics{grid-template-columns:repeat(2,1fr)}.metric{font-size:12px}.metric b{font-size:20px}.top{align-items:flex-start}.schoolBox{max-width:120px}.jersey{width:64px;height:64px}}
+.profileCompact{padding:12px;overflow:hidden}
+.profileLine{display:grid;grid-template-columns:52px minmax(105px,1.35fr) minmax(88px,1fr) repeat(6,minmax(54px,.72fr));align-items:center;gap:6px;width:100%}
+.profileCompact .identity{display:contents}.profileCompact .jersey{width:48px;height:48px;font-size:22px}
+.profileName{font-size:19px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.profileCompact .pill{padding:4px 7px;font-size:10px;white-space:nowrap}
+.profileSchool{text-align:center;min-width:0}.profileSchool .school{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.miniMetric{min-width:0;text-align:center;padding-left:5px;border-left:1px solid #29455c;white-space:nowrap}
+.miniMetric b{display:block;font-size:14px}.miniMetric small{font-size:9px;color:#91a4b8}
+.modalBack{position:fixed;inset:0;background:#02070dcc;display:grid;place-items:center;padding:18px;z-index:50}.modalBack.hidden{display:none}.modal{width:min(520px,100%);background:#0b1c2b;border:1px solid #ffbd38;border-radius:18px;padding:20px;box-shadow:0 20px 60px #000}.diceRow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.die{width:48px;height:48px;border:1px solid #ffbd38;border-radius:10px;background:#151f2b;color:#ffc044;font-size:22px;font-weight:900}.die.used{opacity:.35;border-color:#52606e}.injury{border-color:#ff6868!important}.rewardBadge{display:inline-block;background:#17334a;border:1px solid #31516b;border-radius:9px;padding:7px 10px;margin:4px}.seasonRecord{font-size:13px;color:#91a4b8;margin-top:10px}@media(max-width:480px){
+ .metrics{grid-template-columns:repeat(2,1fr)}.metric{font-size:12px}.metric b{font-size:20px}.top{align-items:flex-start}.schoolBox{max-width:120px}.jersey{width:64px;height:64px}
+ .profileCompact{padding:10px}
+ .profileLine{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .profileLine::-webkit-scrollbar{display:none}
+ .profileCompact .identity{display:flex;align-items:center;gap:7px;min-width:174px}
+ .profileCompact .jersey{flex:0 0 46px;width:46px;height:46px;font-size:21px}
+ .profileName{font-size:18px;max-width:108px}
+ .profileSchool{flex:0 0 84px}
+ .miniMetric{flex:0 0 58px}
+}
+
+.seedRow{display:grid;grid-template-columns:1fr 82px;gap:8px;align-items:start}
+.seedBtn{height:48px;margin-top:5px;border-radius:12px;border:1px solid #38536c;background:#102438;color:#dcecff;font-weight:800}
+.themePick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 14px}
+.themeChoice{min-height:92px;text-align:left;padding:14px;border-radius:15px;border:1px solid #35506a;background:linear-gradient(145deg,#0c1b2b,#10263a);color:#fff}
+.themeChoice b,.themeChoice small{display:block}.themeChoice b{font-size:15px;margin-bottom:7px}.themeChoice small{color:#91a4b8;line-height:1.4}
+.themeChoice.on{border-color:#ffc044;box-shadow:0 0 0 1px #ffc04455 inset}
+body.theme-night{background-image:linear-gradient(#04111fd9,#04111ff0),url('bg-night.jpg');background-size:cover;background-position:center;background-attachment:fixed;background:
+ linear-gradient(#04111fd9,#04111ff0),
+ radial-gradient(circle at 18% 0%,#164a7a 0,transparent 34%),
+ linear-gradient(135deg,#07111d,#0b2031 55%,#06101a)}
+body.theme-youth{background-image:linear-gradient(#13202acc,#13202ae8),url('bg-youth.jpg');background-size:cover;background-position:center;background-attachment:fixed;background:
+ linear-gradient(#13202acc,#13202ae8),
+ radial-gradient(circle at 85% 5%,#d69b48 0,transparent 30%),
+ linear-gradient(135deg,#233a49,#71512f 58%,#152330)}
+body.theme-youth .card{background:#10202bea;border-color:#496171}
+body.theme-youth .bottom{background:#10191feF}
+.profileLine2{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #29455c}
+.profileLine2 .miniMetric{border-left:0;padding-left:0}
+@media(max-width:480px){
+ .themePick{grid-template-columns:1fr 1fr}
+ .profileLine{display:grid!important;grid-template-columns:46px minmax(100px,1fr) minmax(82px,.85fr)!important;overflow:visible!important}
+ .profileCompact .identity{display:contents!important;min-width:0!important}
+ .profileName{max-width:none!important}
+ .profileLine2{grid-template-columns:repeat(3,1fr);row-gap:9px}
+ .profileLine2 .miniMetric:nth-child(n+4){border-top:1px solid #29455c;padding-top:7px}
+}
+
 </style>
 </head>
 <body><main class="wrap">
 <section id="home">
- <div class="hero"><div style="font-size:62px">🏐</div><h1>排球人生</h1><div class="muted">VOLLEY LIFE · v5</div><p>從高中開始，寫下你的排球生涯。</p></div>
+ <div class="hero"><div style="font-size:62px">🏐</div><h1>排球人生</h1><div class="muted">VOLLEY LIFE · v6.2</div><p>從高中開始，寫下你的排球生涯。</p></div>
  <div class="card"><button class="btn gold" onclick="showCreate()">開始新生涯</button><button id="continueBtn" class="btn secondary" onclick="loadGame()">繼續生涯</button></div>
 </section>
 
@@ -45,13 +91,20 @@
  <label>位置</label><div id="positions" class="positions"></div>
  <p class="muted">身高與體重會依照位置由系統自動生成，生涯中仍會顯示並可能改變。</p>
  <label>高中</label><select id="school"></select>
+<label>種子代碼</label>
+<div class="seedRow"><input id="seedCode" class="input" placeholder="留空將自動產生"><button type="button" class="seedBtn" onclick="randomizeSeed()">隨機</button></div>
+<label>球館背景</label>
+<div class="themePick">
+ <button type="button" id="themeNight" class="themeChoice on" onclick="selectTheme('night')"><b>🌙 深夜球館</b><small>冷色燈光・沉浸球場</small></button>
+ <button type="button" id="themeYouth" class="themeChoice" onclick="selectTheme('youth')"><b>☀️ 青春球館</b><small>暖陽木地板・校園感</small></button>
+</div>
  <button class="btn gold" onclick="createCareer()">進入排球人生</button><button class="btn secondary" onclick="show('home')">返回</button>
  </div>
 </section>
 
 <section id="dash" class="hidden">
  <div class="card profileCompact"><div class="profileLine">
-  <div class="identity"><div id="jersey" class="jersey"></div><div><h2 id="playerName" class="profileName" style="margin:0 0 4px"></h2><span id="position" class="pill"></span></div></div>
+  <div class="identity"><div id="jersey" class="jersey"></div><div><h2 id="playerName" class="profileName" style="margin:0 0 4px"></h2><span id="position" class="pill"></span></div><div class="profileLine2"></div></div>
   <div class="profileSchool"><small class="muted">所屬學校</small><div id="team" class="school"></div><span id="grade" class="pill grade"></span></div>
   <div class="miniMetric"><b id="age"></b><small>年齡</small></div><div class="miniMetric"><b id="year"></b><small>年份</small></div><div class="miniMetric"><b id="ovr"></b><small>綜合</small></div><div class="miniMetric"><b id="height"></b><small>身高</small></div><div class="miniMetric"><b id="weight"></b><small>體重</small></div><div class="miniMetric"><b id="salary">0</b><small>生涯薪(萬)</small></div>
  </div></div>
@@ -64,25 +117,46 @@
  <h2>🎓 大學招募</h2><div class="card"><div class="title goldText">高中生涯完成</div><p id="recruitSummary"></p><p class="muted">依照高中表現與球員能力，以下學校向你提出招募邀請。</p></div>
  <div id="offers" class="uni"></div><button class="btn secondary" onclick="show('dash')">返回查看高中紀錄</button>
 </section>
-</main><div id="matchModal" class="modalBack hidden"></div><div class="bottom">🏐 VOLLEY LIFE ｜ 排球人生 v6</div>
+</main><div id="matchModal" class="modalBack hidden"></div><div class="bottom">🏐 VOLLEY LIFE ｜ 排球人生 v6.2</div>
 
 <script>
 const positions={OH:'主攻手',S:'舉球員',MB:'副攻手',L:'自由球員'};
 const schools=['豐原高商','內湖高工','華僑高中','麥寮高中','屏榮高中','大成商工','內湖高中','頭城家商','福成高中','建國中學','龍津高中','苑裡高中','東方工商','大溪高中','明德高中','曾文農工','瑞芳高工'];
 const universities=['台灣體大','台北市大','臺灣師大','中原大學','國北教大','彰化師大','大仁科大','台北大學','嘉義大學','臺灣大學','陽明交大','清華大學'];
-const keys=['扣球','發球','接發','防守','攔網','舉球','彈跳','速度','力量','體能','反應','球商','心態'];
+const keys=['扣球','發球','接發','防守','攔網','舉球','彈跳','速度','力量','體能','球商'];
 const matchSchedule={3:{key:'yongxin',name:'永信杯',type:'cup'},6:{key:'huazong',name:'華宗杯',type:'cup'},10:{key:'league',name:'高中聯賽',type:'league'}};
 let selected='OH',game=null,selectedDie=null;
 const $=id=>document.getElementById(id),nameEl=$('name'),schoolEl=$('school'),continueBtnEl=$('continueBtn'),positionsEl=$('positions');
 function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a} function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-function show(id){['home','create','dash','recruit'].forEach(x=>$(x).classList.toggle('hidden',x!==id));refreshContinue()} function showCreate(){show('create')}
+
+function hashSeed(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function seedRand(seed,salt=0){let x=(hashSeed(seed)+salt*2654435761)>>>0;x^=x<<13;x^=x>>>17;x^=x<<5;return (x>>>0)/4294967296}
+function makeSeed(){return 'VL-'+Math.floor(100000+Math.random()*900000)}
+function randomizeSeed(){if($('seedCode'))$('seedCode').value=makeSeed()}
+function selectTheme(t){selectedTheme=t;document.body.classList.remove('theme-night','theme-youth');document.body.classList.add('theme-'+t);if($('themeNight'))$('themeNight').classList.toggle('on',t==='night');if($('themeYouth'))$('themeYouth').classList.toggle('on',t==='youth')}
+function applyTheme(){selectTheme((game&&game.theme)||selectedTheme||'night')}
+
+function show(id){applyTheme();['home','create','dash','recruit'].forEach(x=>$(x).classList.toggle('hidden',x!==id));refreshContinue()} function showCreate(){show('create')}
 function renderPositions(){positionsEl.innerHTML='';Object.entries(positions).forEach(([k,v])=>{let b=document.createElement('button');b.className='pos '+(k===selected?'on':'');b.textContent=v;b.onclick=()=>{selected=k;renderPositions()};positionsEl.appendChild(b)})}
 schools.forEach(x=>schoolEl.innerHTML+=`<option>${x}</option>`);for(let i=1;i<=20;i++)$('jerseySelect').innerHTML+=`<option value="${i}" ${i===10?'selected':''}>${i} 號</option>`;renderPositions();
 function bodyFor(pos){const r={OH:[176,190,65,82],MB:[184,200,70,90],S:[172,185,62,78],L:[165,180,57,72]}[pos];return{height:rnd(r[0],r[1]),weight:rnd(r[2],r[3])}}
 function calc(){game.player.ovr=Math.round(keys.reduce((s,k)=>s+game.player.abilities[k],0)/keys.length)}
-function newPreseasonDice(){let n=rnd(1,7);game.allocMode='preseason';game.dice=Array.from({length:n},()=>({value:rnd(1,7),used:false,key:null}));game.points=0;game.allocated={}}
-function createCareer(){let n=nameEl.value.trim();if(!n)return alert('請輸入姓名');let abilities={};keys.forEach(k=>abilities[k]=rnd(48,68));let body=bodyFor(selected);game={version:6,stage:'highschool',player:{name:n,pos:selected,jersey:+$('jerseySelect').value,height:body.height,weight:body.weight,abilities,ovr:0},team:schoolEl.value,age:16,year:2026,grade:1,week:1,points:0,allocated:{},results:{},history:[],events:[],pendingEvent:null,pendingMatch:null,injury:null,seasonEnded:false};newPreseasonDice();calc();saveGame(false);renderDash();show('dash')}
-function migrate(){if(!game.player.jersey)game.player.jersey=10;if(!game.player.height||!game.player.weight){let b=bodyFor(game.player.pos==='OP'?'OH':game.player.pos);game.player.height=b.height;game.player.weight=b.weight}if(game.player.pos==='OP')game.player.pos='OH';game.history=game.history||[];game.events=game.events||[];game.results=game.results||{};game.pendingEvent=null;game.pendingMatch=game.pendingMatch||null;game.injury=game.injury||null;game.stage=game.stage||'highschool';game.week=Math.min(game.week||1,10);if(!game.allocMode&&game.points>0){game.allocMode='postseason'}if(!game.dice&&game.points===0&&game.week===1)newPreseasonDice()}
+function talentDiceCount(t){
+ let roll=Math.random()*100;
+ if(t>=90)return roll<50?7:roll<80?6:5;
+ if(t>=80)return roll<35?6:roll<70?5:4;
+ if(t>=70)return roll<30?5:roll<65?4:3;
+ if(t>=60)return roll<35?4:roll<70?3:2;
+ return roll<45?2:1;
+}
+function newPreseasonDice(){
+ let n=talentDiceCount(game.player.talent||60);
+ game.allocMode='preseason';
+ game.dice=Array.from({length:n},()=>({value:rnd(1,7),used:false,key:null}));
+ game.points=0;game.allocated={};
+}
+function createCareer(){let n=nameEl.value.trim();if(!n)return alert('請輸入姓名');let abilities={};keys.forEach(k=>abilities[k]=rnd(48,68));let body=bodyFor(selected);game={version:6,stage:'highschool',player:{name:n,pos:selected,jersey:+$('jerseySelect').value,height:body.height,weight:body.weight,talent:50+Math.floor(seedRand(seed,7)*50),abilities,ovr:0},team:schoolEl.value,age:16,year:2026,grade:1,week:1,points:0,allocated:{},results:{},history:[],events:[],pendingEvent:null,pendingMatch:null,injury:null,seasonEnded:false};newPreseasonDice();calc();saveGame(false);renderDash();show('dash')}
+function migrate(){if(!game.seed)game.seed=makeSeed();if(!game.theme)game.theme='night';if(!game.player.talent)game.player.talent=50+Math.floor(seedRand(game.seed,7)*50);delete game.player.abilities['反應'];delete game.player.abilities['心態'];if(!game.player.jersey)game.player.jersey=10;if(!game.player.height||!game.player.weight){let b=bodyFor(game.player.pos==='OP'?'OH':game.player.pos);game.player.height=b.height;game.player.weight=b.weight}if(game.player.pos==='OP')game.player.pos='OH';game.history=game.history||[];game.events=game.events||[];game.results=game.results||{};game.pendingEvent=null;game.pendingMatch=game.pendingMatch||null;game.injury=game.injury||null;game.stage=game.stage||'highschool';game.week=Math.min(game.week||1,10);if(!game.allocMode&&game.points>0){game.allocMode='postseason'}if(!game.dice&&game.points===0&&game.week===1)newPreseasonDice()}
 function allocOpen(){return (game.allocMode==='preseason'&&game.dice&&game.dice.some(d=>!d.used))||(game.allocMode==='postseason'&&game.points>0)}
 function renderDash(){migrate();let p=game.player;$('playerName').textContent=p.name;$('jersey').textContent=p.jersey;$('position').textContent=positions[p.pos];$('team').textContent=game.team;$('grade').textContent=game.stage==='university'?'大'+['','一','二','三','四'][game.grade]:'高'+['','一','二','三'][game.grade];$('age').textContent=game.age;$('year').textContent=game.year;$('ovr').textContent=p.ovr;$('height').textContent=p.height+'cm';$('weight').textContent=p.weight+'kg';renderAlloc();renderRandomEvent();renderSeason();$('nextBtn').disabled=!!game.pendingEvent||!!game.pendingMatch||allocOpen();renderMatchModal()}
 function renderAlloc(){let card=$('allocCard');card.classList.toggle('hidden',!allocOpen());$('allocList').innerHTML='';$('diceBox').innerHTML='';if(!allocOpen())return;if(game.allocMode==='preseason'){$('allocTitle').textContent='球季前｜分配訓練成果';$('allocModeLabel').textContent=`${game.dice.length} 顆骰子`;$('allocHelp').textContent='點選一顆骰子，再點能力旁的「套用」。每顆骰子最高 7 點。';game.dice.forEach((d,i)=>{$('diceBox').innerHTML+=`<button class="die ${d.used?'used':''}" ${d.used?'disabled':''} onclick="selectDie(${i})">${d.value}</button>`});keys.forEach(k=>{$('allocList').innerHTML+=`<div class="alloc"><span>${k} <b>${game.player.abilities[k]}</b></span><span></span><button class="mini" onclick="applyDie('${k}')">＋</button></div>`})}else{$('allocTitle').textContent='季末｜分配比賽成果';$('allocModeLabel').textContent=`剩餘 ${game.points} 點`;$('allocHelp').textContent='比賽成績轉成能力點，季末可以 1 點 1 點自由分配。';keys.forEach(k=>{let used=game.allocated[k]||0;$('allocList').innerHTML+=`<div class="alloc"><span>${k} <b>${game.player.abilities[k]}</b> <small class="greenText">+${used}</small></span><button class="mini" onclick="adjPoint('${k}',-1)">−</button><button class="mini" onclick="adjPoint('${k}',1)">＋</button></div>`})}}
@@ -113,5 +187,5 @@ function renderSeason(){if(game.stage==='university'){$('season').innerHTML=`<di
 function saveGame(msg){localStorage.setItem('volleyball-life-save-v6',JSON.stringify(game));if(msg)alert('生涯已儲存')}
 function loadGame(){try{game=JSON.parse(localStorage.getItem('volleyball-life-save-v6'))||JSON.parse(localStorage.getItem('volleyball-life-save-v5'))||JSON.parse(localStorage.getItem('volleyball-life-save-v4'));if(!game)throw 0;migrate();calc();if(game.stage==='recruit'){if(!game.offers)makeOffers();else{renderRecruit();show('recruit')}}else{renderDash();show('dash')}}catch(e){console.error(e);alert('目前沒有可讀取的存檔')}}
 function refreshContinue(){continueBtnEl.disabled=!(localStorage.getItem('volleyball-life-save-v6')||localStorage.getItem('volleyball-life-save-v5')||localStorage.getItem('volleyball-life-save-v4'))}
-document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});document.addEventListener('gesturestart',e=>e.preventDefault(),{passive:false});refreshContinue();
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});document.addEventListener('gesturestart',e=>e.preventDefault(),{passive:false});selectTheme('night');refreshContinue();
 </script></body></html>
